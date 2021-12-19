@@ -1,0 +1,6 @@
+<h4><%= link_to document.title, document_path(document) %></h4>
+<p><em><%= gregorian_to_jalali(format_time(document.updated_on)) %></em></p>
+
+<div class="wiki">
+  <%= textilizable(truncate_lines(document.description), :object => document) %>
+</div>

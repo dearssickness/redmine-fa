@@ -1,0 +1,5 @@
+<!-- <p><%#= f.date_field(:default_value, :value => @custom_field.default_value, :size => 10) %></p> -->
+<p> <%= text_field(:default_value_jalali, :custom_field, autocomplete: 'off') %>
+<%= calendar_for('default_value_jalali_custom_field') %>
+<%= f.text_field(:default_value, :size => 10, autocomplete: 'off', class:'default_value_jalali_custom_field_hasdatepicker', style: 'display:none;') %></p>
+<p><%= f.text_field :url_pattern, :size => 50, :label => :label_link_values_to %></p>

@@ -1,0 +1,5 @@
+<div dir="rtl">
+<%= l(:text_issue_added, :id => link_to("##{@issue.id}", @issue_url), :author => h(@issue.author)).html_safe %>
+</div>
+<hr />
+<%= render :partial => 'issue', :formats => [:html], :locals => { :issue => @issue, :user => @user, :issue_url => @issue_url } %>

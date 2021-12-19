@@ -1,0 +1,65 @@
+<h2><%= @query.new_record? ? l(:label_calendar) : @query.name %></h2>
+<%@jdate_counter = 1%>
+<%= form_tag({:controller => 'calendars', :action => 'show', :project_id => @project},
+             :method => :get, :id => 'query_form') do %>
+<%= hidden_field_tag 'set_filter', '1' %>
+
+<div id="query_form_with_buttons" class="hide-when-print">
+<div id="query_form_content">
+  <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
+    <legend onclick="toggleFieldset(this);" class="icon icon-<%= @query.new_record? ? "expended" : "collapsed" %>"><%= l(:label_filter_plural) %></legend>
+    <div style="<%= @query.new_record? ? "" : "display: none;" %>">
+      <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
+    </div>
+  </fieldset>
+</div>
+
+<p class="contextual">
+  <%= link_to_previous_month(@year, @month, :accesskey => accesskey(:previous)) %> | <%= link_to_next_month(@year, @month, :accesskey => accesskey(:next)) %>
+</p>
+
+<%jdt = jdate_partials(@year.to_s+'-'+@month.to_s+'-'+User.current.today.day.to_s) %>
+
+<p class="buttons">
+  <%= label_tag('month', l(:label_month)) %>
+
+  <%= hidden_field_tag 'month', @month %>
+
+  <%= hidden_field_tag 'year', @year %>
+
+  <%= hidden_field_tag 'day', jdt["day"] %>
+
+  <%= select_month(jdt["month"], :prefix => "jmonth", :discard_type => true) %>
+
+  <%= label_tag('year', l(:label_year)) %>
+
+  <%= select_year(jdt["year"], :prefix => "jyear", :discard_type => true) %>
+
+  <%= link_to_function l(:button_apply), 'updateInputs(); $("#query_form").submit()', :class => 'icon icon-checked' %>
+  <%= link_to l(:button_clear), { :project_id => @project, :set_filter => 1 }, :class => 'icon icon-reload' %>
+</p>
+</div>
+<% end %>
+
+<%= error_messages_for 'query' %>
+<% if @query.valid? %>
+<%= render :partial => 'common/calendar', :locals => {:calendar => @calendar, :jdt_elements => @jdt_elements} %>
+
+<%= call_hook(:view_calendars_show_bottom, :year => @year, :month => @month, :project => @project, :query => @query) %>
+
+<p class="legend cal">
+  <span class="starting"><%= l(:text_tip_issue_begin_day) %></span>
+  <span class="ending"><%= l(:text_tip_issue_end_day) %></span>
+  <span class="starting ending"><%= l(:text_tip_issue_begin_end_day) %></span>
+</p>
+<% end %>
+
+<% content_for :sidebar do %>
+    <%= render :partial => 'issues/sidebar' %>
+<% end %>
+
+<% html_title(l(:label_calendar)) -%>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag "update-inputs.js" %>
+<%end%>
