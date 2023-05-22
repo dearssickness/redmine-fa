@@ -1,3 +1,23 @@
+= Virtual machine link
+
+Now you can download ready to use Virtual Machine from the link below. You should create a new VM and add this vmdk disk to it. This vmdk should be the main disk drive you add to the VM (it has /boot and etc.). I've partitioned "/data" as a seperate LVM, so you can shrink or add to it easily.
+
+Make sure to change IP address and subnetmask based on your network IP range.
+
+Username of the the VM is "root" with password "a".
+
+Root password of the MySQL is "a" too.
+
+Redmine username also configured with "a" password to access redmine application database.
+
+You may consider change all the above passwords based on your needs but becarefull not to break database access of "redmine" username.
+
+
+https://drive.google.com/drive/folders/1YAlbS5ftAgbPK4wZsVe_T-1pRyLnFv30
+
+
+
+
 = Redmine
 
 Redmine is a flexible project management web application written using Ruby on Rails framework.
