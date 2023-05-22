@@ -4,11 +4,13 @@ Now you can download ready to use Virtual Machine from the link below. You shoul
 
 Make sure to change IP address and subnetmask based on your network IP range.
 
-Username of the the VM is "root" with password "a".
+* Username of the the VM is "root" with password "a".
 
-Root password of the MySQL is "a" too.
+* Root password of the MySQL is "a" too.
 
-Redmine username also configured with "a" password to access redmine application database.
+* Redmine username also configured with "a" password to access redmine application database.
+
+* Finally to login Redmine application through web, use default username and password admin/admin.
 
 You may consider change all the above passwords based on your needs but becarefull not to break database access of "redmine" username.
 
